@@ -16,14 +16,5 @@ namespace PhotoExploration.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public bool Admin { get; set; }
-        
-        public virtual ICollection<Comment> Comments { get; set; }
-        public virtual ICollection<Photo> Photos { get; set; }
-
-        public User()
-        {
-            Comments = new HashSet<Comment>();
-            Photos = new HashSet<Photo>();
-        }
     }
 }

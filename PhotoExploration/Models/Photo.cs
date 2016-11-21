@@ -16,9 +16,6 @@ namespace PhotoExploration.Models
         public DateTime DateAdded { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
-        public int? UserId { get; set; }
-        [ForeignKey(name: "UserId")]
-        public virtual User User { get; set; }
 
         public Photo()
         {

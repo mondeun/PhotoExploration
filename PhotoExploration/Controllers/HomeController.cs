@@ -8,11 +8,13 @@ namespace PhotoExploration.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "Our goal is to let you explore everything from the abstract to the raw reality with this photo gallery site.";

@@ -10,16 +10,12 @@ namespace PhotoExploration.Models
         public int Id { get; set; }
         [Required]
         public string Text { get; set; }
-
-        public virtual ICollection<Photo> Photos { get; set; }
-        public int? UserId { get; set; }
+        public DateTime DateAdded { get; set; }
+        public int PhotoId { get; set; }
+        [ForeignKey(name:"PhotoId")]
+        public virtual Photo Photo { get; set; }
+        public int UserId { get; set; }
         [ForeignKey(name: "UserId")]
         public virtual User User { get; set; }
-
-        public Comment()
-        {
-            Photos = new HashSet<Photo>();
-        }
-
     }
 }

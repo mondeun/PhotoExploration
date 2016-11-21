@@ -19,7 +19,7 @@ namespace PhotoExploration.Helpers
         {
             using (var ctx = new PhotoExplorationContext())
             {
-                return ctx.Photos.Include(i => i.Comments).Include(i => i.User).FirstOrDefault(x => x.Id == id);
+                return ctx.Photos.Include(i => i.Comments).FirstOrDefault(x => x.Id == id);
             }
         }
     }

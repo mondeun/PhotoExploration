@@ -20,9 +20,11 @@ namespace PhotoExploration.Controllers
             return View(photos);
         }
 
+        [AllowAnonymous]
         public ActionResult Show(Photo item)
         {
-            return View(PhotoHelper.GetPhoto(item.Id));
+            var picture = db.Photos.Include(i => i.Comments).FirstOrDefault(x => x.Id == item.Id);
+            return View(picture);
         }
     }
 }

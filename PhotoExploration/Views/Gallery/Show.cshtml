@@ -12,9 +12,10 @@
     <p>@Model.Description</p>
     
     <h3>Comments</h3>
-    @foreach (var comment in Model.Comments)
+    @foreach (var comment in Model.Comments.OrderBy(x => x.DateAdded))
     {
         <h4>@comment.User.Name</h4>
+        <p>@comment.DateAdded.ToLocalTime()</p>
         <p>@comment.Text</p>
     }
 </div>
