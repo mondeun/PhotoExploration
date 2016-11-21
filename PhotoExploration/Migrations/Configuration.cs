@@ -44,8 +44,8 @@ namespace PhotoExploration.Migrations
                 );
 
             context.Comments.AddOrUpdate(x => x.Id,
-                new Comment { Id = 1, Text = "That looks beautiful", DateAdded = DateTime.Now, PhotoId = 1, UserId = 1},
-                new Comment { Id = 2, Text = "That looks beautiful", DateAdded = DateTime.Now, PhotoId = 1, UserId = 2 },
+                new Comment { Id = 1, Text = "Stunning", DateAdded = DateTime.Now.AddDays(-4), PhotoId = 1, UserId = 1},
+                new Comment { Id = 2, Text = "That looks beautiful", DateAdded = DateTime.Now.AddDays(-2), PhotoId = 1, UserId = 2 },
                 new Comment { Id = 3, Text = "Yes it does!", DateAdded = DateTime.Now, PhotoId = 1, UserId = 1 },
                 new Comment { Id = 4, Text = "Terrible", DateAdded = DateTime.Now, PhotoId = 3, UserId = 2 }
                 );
