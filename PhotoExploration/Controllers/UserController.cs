@@ -39,8 +39,8 @@ namespace PhotoExploration.Controllers
                         }, "AppCookie");
 
                         var ctx = Request.GetOwinContext();
-                        var login = ctx.Authentication;
-                        login.SignIn(identity);
+                        var auth = ctx.Authentication;
+                        auth.SignIn(identity);
 
                         return RedirectToAction("Index", "Home");
                     }
@@ -79,6 +79,16 @@ namespace PhotoExploration.Controllers
             else
                 ModelState.AddModelError("", "Missing information");
 
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            var ctx = Request.GetOwinContext();
+            var auth = ctx.Authentication;
+
+            auth.SignOut("AppCookie");
             return RedirectToAction("Index", "Home");
         }
     }

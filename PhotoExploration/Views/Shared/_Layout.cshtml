@@ -26,8 +26,17 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>@Html.ActionLink("Register", "Register", "User")</li>
-                    <li>@Html.ActionLink("Log in", "Login", "User")</li>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <li class="navbar-text">@User.Identity.Name</li>
+                        <li>@Html.ActionLink("Account", "Index", "Management", new {area = "Administration"}, null)</li>
+                        <li><a href="@Url.Action("Logout", "User")">Log Out</a></li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "User")</li>
+                        <li>@Html.ActionLink("Log in", "Login", "User")</li>
+                    }
                 </ul>
             </div>
         </div>
