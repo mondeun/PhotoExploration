@@ -1,8 +1,28 @@
-﻿@{
+﻿@using PhotoExploration.Models
+@model IEnumerable<PhotoExploration.Models.GalleryPhotoViewModel>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Photo Exploration</h1>
     <p class="lead">Welcome to Photo Exploration. Check out our amazing gallery and comment on everything you like.</p>
+</div>
+
+<div class="container">
+    <div class="col-sm-12">
+        <h3>@Html.ActionLink("Upload picture", "UploadPhoto", "Home", new { area = ""}, new { @class = "caption" })</h3>
+    </div>
+    <div class="row">
+        @foreach (var photo in Model)
+        {
+            <div class="col-sm-3">
+                <a href="@string.Format($"/Gallery/Details/{photo.Id}")" class="thumbnail">
+                    <img src="~/Photos/@photo.FileName" alt="@photo.Name">
+                    <h3 class="caption">@photo.Name</h3>
+                </a>
+            </div>
+        }
+    </div>
 </div>

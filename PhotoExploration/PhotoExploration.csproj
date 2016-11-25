@@ -167,10 +167,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Administration\AdministrationAreaRegistration.cs" />
     <Compile Include="Areas\Administration\Controllers\ManagementController.cs" />
+    <Compile Include="Areas\Administration\Models\AlbumViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\CommentViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\IndexViewModel.cs" />
     <Compile Include="Areas\Administration\Models\PhotoModels.cs" />
+    <Compile Include="Areas\Administration\Models\PhotoViewModel.cs" />
+    <Compile Include="Areas\Administration\Models\UserViewModel.cs" />
+    <Compile Include="Areas\User\Controllers\UserController.cs" />
+    <Compile Include="Areas\User\UserAreaRegistration.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -178,6 +185,7 @@
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\DetailsPhotoViewModel.cs" />
     <Compile Include="Models\GalleryPhotoViewModel.cs" />
+    <Compile Include="Models\UploadPhotoViewModel.cs" />
     <Compile Include="Models\UserManagementViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -198,11 +206,12 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Administration\Views\web.config" />
-    <Content Include="Areas\Administration\Views\Management\Index.cshtml" />
     <Content Include="Areas\Administration\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Administration\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Administration\Views\Management\UploadPhoto.cshtml" />
     <Content Include="Areas\Administration\Views\Management\DeleteComment.cshtml" />
+    <Content Include="Areas\User\Views\web.config" />
+    <Content Include="Areas\Administration\Views\Management\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -231,11 +240,16 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Gallery\Details.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\User\Register.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\UploadPhoto.cshtml" />
+    <Content Include="Views\Shared\_UserMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\User\Models\" />
+    <Folder Include="Areas\User\Views\Account\" />
+    <Folder Include="Areas\User\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

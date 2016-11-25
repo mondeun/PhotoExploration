@@ -7,7 +7,7 @@ using PhotoExploration.Models;
 
 namespace PhotoExploration.Controllers
 {
-    public class UserController : Controller
+    public class AccountController : Controller
     {
         // GET: User
         [HttpGet]
@@ -34,6 +34,7 @@ namespace PhotoExploration.Controllers
                         {
                             new Claim(ClaimTypes.Name, dbUser.Name),
                             new Claim(ClaimTypes.Email, dbUser.Email),
+                            new Claim(ClaimTypes.Role, dbUser.Admin ? "Admin" : "User"), 
                             new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
                         }, "AppCookie");
 

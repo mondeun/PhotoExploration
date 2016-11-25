@@ -1,46 +1,140 @@
-﻿@model IEnumerable<PhotoExploration.Models.Comment>
+﻿@model PhotoExploration.Areas.Administration.Models.IndexViewModel
 
 @{
     ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
+<div class="container">
+    <div>
+        <h3>Users</h3>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Upload Photo", "UploadPhoto")
-</p>
-<h3>Your comments</h3>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Photo.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Text)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateAdded)
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model.UserViewModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new {id = item.Id}) |
+                        @Html.ActionLink("Details", "Details", new {id = item.Id}) |
+                        @Html.ActionLink("Delete", "Delete", new {id = item.Id})
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Photo.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Text)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateAdded)
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |*@
-            @Html.ActionLink("Delete", "DeleteComment", new { id=item.Id })
-        </td>
-    </tr>
-}
+    <div>
+        <h3>Albums</h3>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
 
-</table>
+            @foreach (var item in Model.AlbumViewModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div>
+        <h3>Photos</h3>
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Album</th>
+                <th>File Name</th>
+                <th>Uploader</th>
+                <th>Date Added</th>
+                <th>Description</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.PhotoViewModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Album)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FileName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Uploader)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateAdded)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <div>
+        <h3>Comments</h3>
+        <table class="table">
+            <tr>
+                <th>Comment</th>
+                <th>Commenter</th>
+                <th>Date</th>
+                <th>Photo</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.CommentViewModels)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Commenter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhotoName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>

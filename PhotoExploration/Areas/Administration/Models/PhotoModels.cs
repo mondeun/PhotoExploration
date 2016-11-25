@@ -6,7 +6,7 @@ using System.Web;
 
 namespace PhotoExploration.Areas.Administration.Models
 {
-    public class UploadPhotoModel
+    public class UploadPhotoViewModel
     {
         [Required]
         public string Title { get; set; }

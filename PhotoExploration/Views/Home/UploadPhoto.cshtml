@@ -1,4 +1,4 @@
-﻿@model PhotoExploration.Models.UploadPhotoViewModel
+﻿@model PhotoExploration.Areas.Administration.Models.UploadPhotoViewModel
 
 @{
     ViewBag.Title = "UploadPhoto";
@@ -6,10 +6,10 @@
 
 <h2>UploadPhoto</h2>
 
-@using (Html.BeginForm("UploadPhoto", "Management", FormMethod.Post, new {enctype = "multipart/form-data"})) 
+@using (Html.BeginForm("UploadPhoto", "Management", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>UploadPhotoModel</h4>
         <hr />
@@ -29,11 +29,11 @@
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
-        
+
         <div class="form-group">
             <label class="control-label col-md-2">Photo</label>
             <div class="col-md-10">
-                <input type="file" name="photo" id="photo" class="form-control" required/>
+                <input type="file" name="photo" id="photo" class="form-control" required />
             </div>
         </div>
 
@@ -46,5 +46,5 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to Index", "Index")
 </div>

@@ -1,4 +1,4 @@
-﻿@model PhotoExploration.Domain.Models.Comment
+﻿@model PhotoExploration.Areas.Administration.Models.CommentViewModel
 
 @{
     ViewBag.Title = "DeleteComment";
@@ -20,11 +20,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Text)
+            @Html.DisplayNameFor(model => model.Comment)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Text)
+            @Html.DisplayFor(model => model.Comment)
         </dd>
 
         <dt>
