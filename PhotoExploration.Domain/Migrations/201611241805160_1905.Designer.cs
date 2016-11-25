@@ -7,13 +7,13 @@ namespace PhotoExploration.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class Initial : IMigrationMetadata
+    public sealed partial class _1905 : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(_1905));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611210002205_Initial"; }
+            get { return "201611241805160_1905"; }
         }
         
         string IMigrationMetadata.Source

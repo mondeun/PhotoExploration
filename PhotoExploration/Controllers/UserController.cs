@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
+using PhotoExploration.Domain;
+using PhotoExploration.Domain.Models;
 using PhotoExploration.Models;
 
 namespace PhotoExploration.Controllers

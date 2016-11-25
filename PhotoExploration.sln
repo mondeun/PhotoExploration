@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoExploration", "PhotoEx
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoExploration.Tests", "PhotoExploration.Tests\PhotoExploration.Tests.csproj", "{400E233E-E2D0-433F-9C46-0D6043DFEFF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoExploration.Domain", "PhotoExploration.Domain\PhotoExploration.Domain.csproj", "{F40029A8-2B4C-4E7E-9AE2-7AF7E444931A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{400E233E-E2D0-433F-9C46-0D6043DFEFF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{400E233E-E2D0-433F-9C46-0D6043DFEFF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{400E233E-E2D0-433F-9C46-0D6043DFEFF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F40029A8-2B4C-4E7E-9AE2-7AF7E444931A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F40029A8-2B4C-4E7E-9AE2-7AF7E444931A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F40029A8-2B4C-4E7E-9AE2-7AF7E444931A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F40029A8-2B4C-4E7E-9AE2-7AF7E444931A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

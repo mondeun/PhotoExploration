@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PhotoExploration.Models.Photo>
+﻿@model IEnumerable<PhotoExploration.Models.GalleryPhotoViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -11,8 +11,9 @@
         @foreach (var photo in Model)
         {
             <div class="col-sm-3">
-                <a href="@string.Format($"/Gallery/Show/{photo.Id}")" class="thumbnail">
-                    <img src="~/Photos/@photo.Path" alt="@photo.Title">
+                <a href="@string.Format($"/Gallery/Details/{photo.Id}")" class="thumbnail">
+                    <img src="~/Photos/@photo.FileName" alt="@photo.Name">
+                    <h3 class="caption">@photo.Name</h3>
                 </a>
             </div>
         }

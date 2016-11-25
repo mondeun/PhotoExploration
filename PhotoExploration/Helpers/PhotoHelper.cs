@@ -1,26 +1,41 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
+using PhotoExploration.Domain.Models;
 using PhotoExploration.Models;
+using WebGrease.Css.Extensions;
 
 namespace PhotoExploration.Helpers
 {
-    public class PhotoHelper
+    public static class PhotoHelper
     {
-        public static List<Photo> GetAllPhotos()
+        public static DetailsPhotoViewModel MapPhoto(this DetailsPhotoViewModel detailsPhoto, Photo photo)
         {
-            using (var ctx = new PhotoExplorationContext())
-            {
-                return ctx.Photos.ToList();
-            }
-        }
+            detailsPhoto.Id = photo.Id;
+            detailsPhoto.Name = photo.Name;
+            detailsPhoto.Description = photo.Description;
+            detailsPhoto.FileName = photo.FileName;
+            detailsPhoto.UploadedBy = photo.User.Name;
+            
+            //photo.Comments.ToList().ForEach(x => detailsPhoto.Comments.Add(
+            //    new CommentViewModel
+            //    {
+            //        Commenter = x.User.Name,
+            //        Comment = x.Text,
+            //        Date = x.Date
+            //    }
+            //    ));
 
-        public static Photo GetPhoto(int id)
-        {
-            using (var ctx = new PhotoExplorationContext())
+            foreach (var comment in photo.Comments.ToList())
             {
-                return ctx.Photos.Include(i => i.Comments).FirstOrDefault(x => x.Id == id);
+                detailsPhoto.Comments.Add(new CommentViewModel
+                {
+                    Commenter = comment.User.Name,
+                    Comment = comment.Text,
+                    Date = comment.Date
+                });
             }
+
+
+            return detailsPhoto;
         }
     }
 }
