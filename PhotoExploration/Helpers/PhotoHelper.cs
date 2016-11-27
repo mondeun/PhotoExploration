@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using PhotoExploration.Domain;
 using PhotoExploration.Domain.Models;
 using PhotoExploration.Models;
 using WebGrease.Css.Extensions;
@@ -25,17 +27,6 @@ namespace PhotoExploration.Helpers
                 }
                 ));
 
-            //foreach (var comment in photo.Comments.ToList())
-            //{
-            //    detailsPhoto.Comments.Add(new CommentViewModel
-            //    {
-            //        Commenter = comment.User.Name,
-            //        Comment = comment.Text,
-            //        Date = comment.Date
-            //    });
-            //}
-
-
             return detailsPhoto;
         }
 
@@ -49,6 +40,21 @@ namespace PhotoExploration.Helpers
             }));
 
             return galleryPhotos;
+        }
+
+        public static Photo MapPhoto(this UploadPhotoViewModel viewModel, string fileName, Guid albumGuid)
+        {
+            var photo = new Photo()
+            {
+                Id = Guid.NewGuid(),
+                Name = viewModel.Title,
+                Description = viewModel.Description,
+                DateAdded = DateTime.Now,
+                FileName = fileName,
+                AlbumId = albumGuid
+            };
+
+            return photo;
         }
     }
 }

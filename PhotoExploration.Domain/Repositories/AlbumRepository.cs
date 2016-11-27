@@ -9,19 +9,19 @@ using PhotoExploration.Domain.Models;
 
 namespace PhotoExploration.Domain.Repositories
 {
-    public class PhotoRepository : IRepository<Photo>
+    public class AlbumRepository : IRepository<Album>
     {
-        public void Add(Photo item)
+        public void Add(Album item)
         {
             using (var db = new PhotoExplorationContext())
             {
-                db.Photos.Add(item);
+                db.Albums.Add(item);
 
                 db.SaveChanges();
             }
         }
 
-        public void Edit(Photo item)
+        public void Edit(Album photo)
         {
             throw new NotImplementedException();
         }
@@ -31,23 +31,17 @@ namespace PhotoExploration.Domain.Repositories
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Photo> GetItems()
+        public IEnumerable<Album> GetItems()
         {
             using (var db = new PhotoExplorationContext())
             {
-                return db.Photos.Include("Comments").Include("Album").Include("User").ToList();
+                return db.Albums.Include("User").Include("Photos").ToList();
             }
         }
 
-        public Photo FindById(Guid id)
+        public Album FindById(Guid id)
         {
-            using (var db = new PhotoExplorationContext())
-            {
-                var photo = db.Photos.Include("User").Include( i => i.Comments).Include("Album").FirstOrDefault(x => x.Id == id);
-                photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
-
-                return photo;
-            }
+            throw new NotImplementedException();
         }
     }
 }

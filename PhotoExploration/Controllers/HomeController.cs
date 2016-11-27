@@ -22,7 +22,7 @@ namespace PhotoExploration.Controllers
         public ActionResult Index()
         {
             var photos = new List<GalleryPhotoViewModel>();
-            photos.MapPhotos(PhotoRepository.GetPhotos().ToList());
+            photos.MapPhotos(PhotoRepository.GetItems().ToList());
 
             return View(photos);
         }
@@ -32,11 +32,6 @@ namespace PhotoExploration.Controllers
         {
             ViewBag.Message = "Our goal is to let you explore everything from the abstract to the raw reality with this photo gallery site.";
 
-            return View();
-        }
-
-        public ActionResult UploadPhoto()
-        {
             return View();
         }
     }

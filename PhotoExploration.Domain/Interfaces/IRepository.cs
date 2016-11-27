@@ -4,13 +4,13 @@ using PhotoExploration.Domain.Models;
 
 namespace PhotoExploration.Domain.Interfaces
 {
-    public interface IPhotoRepository
+    public interface IRepository<T>
     {
-        void Add(Photo photo);
-        void Edit(Photo photo);
+        void Add(T item);
+        void Edit(T item);
         void Remove(Guid id);
-        IEnumerable<Photo> GetPhotos();
-        Photo FindById(Guid id);
+        IEnumerable<T> GetItems();
+        T FindById(Guid id);
 
     }
 }

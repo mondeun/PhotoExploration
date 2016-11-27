@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Helpers;
@@ -9,7 +12,7 @@ namespace PhotoExploration.Controllers
 {
     public class GalleryController : Controller
     {
-        public PhotoRepository PhotoRepository { get; set; }
+        private PhotoRepository PhotoRepository { get; set; }
 
         public GalleryController()
         {
@@ -20,7 +23,7 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var dbPhotos = PhotoRepository.GetPhotos();
+            var dbPhotos = PhotoRepository.GetItems();
             var photos = new List<GalleryPhotoViewModel>();
             dbPhotos.ForEach(x => photos.Add(new GalleryPhotoViewModel
             {
@@ -39,6 +42,24 @@ namespace PhotoExploration.Controllers
             photo.MapPhoto(picture);
 
             return View(photo);
+        }
+
+        [HttpGet]
+        public ActionResult UploadPhoto()
+        {
+            return PartialView();
+        }
+        
+        [HttpPost]
+        public ActionResult UploadPhoto(UploadPhotoViewModel model, HttpPostedFileBase photo)
+        {
+            if (!ModelState.IsValid)
+                return PartialView(model);
+
+            PhotoRepository.Add(model.MapPhoto(photo.FileName, Guid.NewGuid()));
+
+            photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
+            return PartialView("Index");
         }
     }
 }

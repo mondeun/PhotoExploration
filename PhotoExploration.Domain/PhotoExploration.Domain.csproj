@@ -49,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IPhotoRepository.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201611241805160_1905.cs" />
     <Compile Include="Migrations\201611241805160_1905.Designer.cs">
       <DependentUpon>201611241805160_1905.cs</DependentUpon>
@@ -61,6 +61,7 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="PhotoExplorationContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AlbumRepository.cs" />
     <Compile Include="Repositories\PhotoRepository.cs" />
   </ItemGroup>
   <ItemGroup>

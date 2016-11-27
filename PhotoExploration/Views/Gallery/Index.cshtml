@@ -6,7 +6,12 @@
 
 <h2>Gallery</h2>
 
+
+
 <div class="container">
+    <div class="col-sm-12">
+        @Html.Partial("UploadPhoto")
+    </div>
     <div class="row">
         @foreach (var photo in Model)
         {

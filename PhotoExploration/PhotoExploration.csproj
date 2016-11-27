@@ -175,13 +175,18 @@
     <Compile Include="Areas\Administration\Models\UserViewModel.cs" />
     <Compile Include="Areas\User\Controllers\UserController.cs" />
     <Compile Include="Areas\User\UserAreaRegistration.cs" />
+    <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AlbumHelper.cs" />
     <Compile Include="Helpers\PhotoHelper.cs" />
+    <Compile Include="Models\AlbumCreateViewModel.cs" />
+    <Compile Include="Models\AlbumDetailsViewModel.cs" />
+    <Compile Include="Models\AlbumIndexViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\DetailsPhotoViewModel.cs" />
     <Compile Include="Models\GalleryPhotoViewModel.cs" />
@@ -213,6 +218,7 @@
     <Content Include="Areas\User\Views\web.config" />
     <Content Include="Areas\Administration\Views\Management\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\GalleryJs.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -242,8 +248,10 @@
     <Content Include="Views\Gallery\Details.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Home\UploadPhoto.cshtml" />
+    <Content Include="Views\Gallery\UploadPhoto.cshtml" />
     <Content Include="Views\Shared\_UserMenu.cshtml" />
+    <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Album\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

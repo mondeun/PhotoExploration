@@ -12,7 +12,7 @@ namespace PhotoExploration
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = "AppCookie",
-                LoginPath = new PathString("/user/login")
+                LoginPath = new PathString("/Account/login")
             });
         }
     }
