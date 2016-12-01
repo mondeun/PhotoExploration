@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IRepository.cs" />
-    <Compile Include="Migrations\201611241805160_1905.cs" />
-    <Compile Include="Migrations\201611241805160_1905.Designer.cs">
-      <DependentUpon>201611241805160_1905.cs</DependentUpon>
+    <Compile Include="Migrations\201611290958408_First.cs" />
+    <Compile Include="Migrations\201611290958408_First.Designer.cs">
+      <DependentUpon>201611290958408_First.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
@@ -69,8 +69,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611241805160_1905.resx">
-      <DependentUpon>201611241805160_1905.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611290958408_First.resx">
+      <DependentUpon>201611290958408_First.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

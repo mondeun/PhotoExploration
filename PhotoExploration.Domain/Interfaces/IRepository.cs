@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using PhotoExploration.Domain.Models;
 
 namespace PhotoExploration.Domain.Interfaces
 {

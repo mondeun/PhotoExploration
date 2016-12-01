@@ -1,21 +1,20 @@
-namespace PhotoExploration.Migrations
+namespace PhotoExploration.Domain.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
-    using Domain;
-    using Domain.Models;
+    using Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PhotoExplorationContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PhotoExploration.Domain.PhotoExplorationContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(PhotoExplorationContext context)
+        protected override void Seed(PhotoExploration.Domain.PhotoExplorationContext context)
         {
             context.Users.AddOrUpdate(x => x.Id,
-                new User { Id = Guid.Parse("fbbf6db0-d7c7-4519-ad9b-fca8c889c5f8"), Name = "Kenneth G", Email = "kg@kg.se", Password = "qwerty", Admin = true,},
+                new User { Id = Guid.Parse("fbbf6db0-d7c7-4519-ad9b-fca8c889c5f8"), Name = "Kenneth G", Email = "kg@kg.se", Password = "qwerty", Admin = true, },
                 new User { Id = Guid.Parse("652eaedf-a246-4d94-b976-57be95cabbd2"), Name = "Steve O", Email = "roudy@yahoo.com", Password = "qazwsx1", Admin = false, }
                 );
 
