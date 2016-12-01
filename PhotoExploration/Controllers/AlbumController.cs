@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using PhotoExploration.Domain;
 using PhotoExploration.Helpers;
 using PhotoExploration.Models;
 using PhotoExploration.Domain.Repositories;

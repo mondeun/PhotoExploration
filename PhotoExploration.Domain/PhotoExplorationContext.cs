@@ -1,5 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.Core.EntityClient;
 using PhotoExploration.Domain.Models;
 
 namespace PhotoExploration.Domain

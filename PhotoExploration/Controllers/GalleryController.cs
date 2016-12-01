@@ -7,7 +7,6 @@ using System.Web.Mvc;
 using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Helpers;
 using PhotoExploration.Models;
-using WebGrease.Css.Extensions;
 
 namespace PhotoExploration.Controllers
 {
