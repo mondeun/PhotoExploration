@@ -48,10 +48,6 @@ namespace PhotoExploration.Controllers
         {
             if (ModelState.IsValid)
             {
-                using (var db = new PhotoExplorationContext())
-                {
-                    model.Creater = db.Users.FirstOrDefault(x => x.Name == User.Identity.Name).Id;
-                }
                 AlbumRepository.Add(model.MapAlbum());
 
                 return RedirectToAction("Index");

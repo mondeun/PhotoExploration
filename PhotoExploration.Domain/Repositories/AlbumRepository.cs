@@ -43,5 +43,13 @@ namespace PhotoExploration.Domain.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public static Guid GetUserId(string name)
+        {
+            using (var db = new PhotoExplorationContext())
+            {
+                return db.Users.Single(x => x.Name == name).Id;
+            }
+        }
     }
 }

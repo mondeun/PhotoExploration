@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PhotoExploration.Domain.Repositories;
@@ -12,33 +13,27 @@ namespace PhotoExploration.Controllers
 {
     public class GalleryController : Controller
     {
-        private PhotoRepository PhotoRepository { get; set; }
+        private PhotoRepository photoRepository;
 
         public GalleryController()
         {
-            PhotoRepository = new PhotoRepository();
+            photoRepository = new PhotoRepository();
         }
 
         // GET: Gallery
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var dbPhotos = PhotoRepository.GetItems();
             var photos = new List<GalleryPhotoViewModel>();
-            dbPhotos.ForEach(x => photos.Add(new GalleryPhotoViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                FileName = x.FileName
-            }));
+            photos.MapPhotos(photoRepository.GetItems().ToList());
+
             return View(photos);
         }
 
         [AllowAnonymous]
         public ActionResult Details(DetailsPhotoViewModel photo)
         {
-            //var picture = db.Photos.Include(i => i.Comments).FirstOrDefault(x => x.Id == item.Id);
-            var picture = PhotoRepository.FindById(photo.Id);
+            var picture = photoRepository.FindById(photo.Id);
             photo.MapPhoto(picture);
 
             return View(photo);
@@ -56,7 +51,7 @@ namespace PhotoExploration.Controllers
             if (!ModelState.IsValid)
                 return PartialView(model);
 
-            PhotoRepository.Add(model.MapPhoto(photo.FileName, Guid.NewGuid()));
+            photoRepository.Add(model.MapPhoto(photo.FileName, Guid.NewGuid()));
 
             photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
             return PartialView("Index");

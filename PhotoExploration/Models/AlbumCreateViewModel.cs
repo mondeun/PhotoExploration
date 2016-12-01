@@ -11,6 +11,6 @@ namespace PhotoExploration.Models
         public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
-        public Guid Creater { get; set; }
+        public string Creater { get; set; }
     }
 }

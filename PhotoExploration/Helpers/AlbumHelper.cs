@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PhotoExploration.Domain.Models;
+using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Models;
 
 namespace PhotoExploration.Helpers
@@ -26,7 +27,7 @@ namespace PhotoExploration.Helpers
             {
                 Id = Guid.NewGuid(),
                 Name = viewModel.Name,
-                UserId = viewModel.Creater
+                UserId = AlbumRepository.GetUserId(viewModel.Creater)
             };
 
             return album;
