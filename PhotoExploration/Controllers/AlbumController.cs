@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using PhotoExploration.Helpers;
@@ -20,16 +21,19 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var albums = new List<AlbumIndexViewModel>();
+            var albums = new List<AlbumViewModel>();
             albums.MapAlbums(AlbumRepository.GetItems().ToList());
             return View(albums);
         }
 
         // GET: Album/Details/5
         [AllowAnonymous]
-        public ActionResult Details(int id)
+        public ActionResult Details(AlbumViewModel model)
         {
-            return View();
+            var album = AlbumRepository.FindById(model.Id);
+            model.MapPhoto(album);
+
+            return View(model);
         }
 
         // GET: Album/Create
@@ -50,51 +54,6 @@ namespace PhotoExploration.Controllers
                 return RedirectToAction("Index");
             }
             return View();
-        }
-
-        // GET: Album/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Album/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Album/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Album/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

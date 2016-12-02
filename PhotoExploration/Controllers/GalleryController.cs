@@ -41,19 +41,20 @@ namespace PhotoExploration.Controllers
         [HttpGet]
         public ActionResult UploadPhoto()
         {
-            return PartialView();
+            var photo = new GalleryPhotoViewModel();
+            return PartialView(photo);
         }
         
         [HttpPost]
-        public ActionResult UploadPhoto(UploadPhotoViewModel model, HttpPostedFileBase photo)
+        public ActionResult UploadPhoto(GalleryPhotoViewModel model, HttpPostedFileBase photo)
         {
             if (!ModelState.IsValid)
                 return PartialView(model);
 
-            photoRepository.Add(model.MapPhoto(photo.FileName, Guid.NewGuid()));
+            photoRepository.Add(model.MapPhoto(photo.FileName));
 
             photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
-            return PartialView("Index");
+            return View("Index");
         }
     }
 }

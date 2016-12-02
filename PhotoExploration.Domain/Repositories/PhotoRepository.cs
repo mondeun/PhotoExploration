@@ -47,5 +47,13 @@ namespace PhotoExploration.Domain.Repositories
                 return photo;
             }
         }
+
+        public static string GetUserName(Guid id)
+        {
+            using (var db = new PhotoExplorationContext())
+            {
+                return db.Users.Single(x => x.Id == id).Name;
+            }
+        }
     }
 }

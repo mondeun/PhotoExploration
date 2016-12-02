@@ -7,7 +7,7 @@
                 url: "Gallery/UploadPhoto",
                 data: new FormData(document.getElementsByTagName("form")[0]),
                 success: function(data) {
-                    $("div#result").html(data);
+                    $("div#galleryList").html(data);
                 },
                 processData: false,
                 contentType: false

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using PhotoExploration.Domain.Models;
+using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Models;
 
 namespace PhotoExploration.Helpers
@@ -40,16 +41,16 @@ namespace PhotoExploration.Helpers
             return galleryPhotos;
         }
 
-        public static Photo MapPhoto(this UploadPhotoViewModel viewModel, string fileName, Guid albumGuid)
+        public static Photo MapPhoto(this GalleryPhotoViewModel viewModel, string fileName)
         {
             var photo = new Photo()
             {
                 Id = Guid.NewGuid(),
-                Name = viewModel.Title,
+                Name = viewModel.Name,
                 Description = viewModel.Description,
                 DateAdded = DateTime.Now,
                 FileName = fileName,
-                AlbumId = albumGuid
+                AlbumId = viewModel.AlbumId
             };
 
             return photo;

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PhotoExploration.Models.AlbumIndexViewModel>
+﻿@model IEnumerable<PhotoExploration.Models.AlbumViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +14,7 @@
         @foreach (var album in Model)
         {
             <div class="col-sm-3">
-                <h3>@Html.ActionLink(album.Name, "Details", new { id = album.Id }, new { @class = "thumbnail" })</h3>
+                <h3>@Html.ActionLink(album.Name, "Details", "Album", new { id = album.Id }, new { @class = "thumbnail" })</h3>
             </div>
         }
     </div>

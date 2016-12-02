@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using PhotoExploration.Domain.Interfaces;
 using PhotoExploration.Domain.Models;
@@ -38,7 +39,20 @@ namespace PhotoExploration.Domain.Repositories
 
         public Album FindById(Guid id)
         {
-            throw new NotImplementedException();
+            using (var db = new PhotoExplorationContext())
+            {
+                var album = db.Albums.Include("User").Include("Photos").FirstOrDefault(x => x.Id == id);
+                if (album != null)
+                {
+                    album.Photos =
+                        db.Photos.Include("User")
+                            .Include("Album")
+                            .Include("Comments")
+                            .Where(x => x.AlbumId == album.Id)
+                            .ToList();
+                }
+                return album;
+            }
         }
 
         public static Guid GetUserId(string name)
@@ -46,6 +60,14 @@ namespace PhotoExploration.Domain.Repositories
             using (var db = new PhotoExplorationContext())
             {
                 return db.Users.Single(x => x.Name == name).Id;
+            }
+        }
+
+        public static string GetUserName(Guid id)
+        {
+            using (var db = new PhotoExplorationContext())
+            {
+                return db.Users.Single(x => x.Id == id).Name;
             }
         }
     }

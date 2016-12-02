@@ -186,12 +186,10 @@
     <Compile Include="Helpers\AlbumHelper.cs" />
     <Compile Include="Helpers\PhotoHelper.cs" />
     <Compile Include="Models\AlbumCreateViewModel.cs" />
-    <Compile Include="Models\AlbumDetailsViewModel.cs" />
-    <Compile Include="Models\AlbumIndexViewModel.cs" />
+    <Compile Include="Models\AlbumViewModel.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\DetailsPhotoViewModel.cs" />
     <Compile Include="Models\GalleryPhotoViewModel.cs" />
-    <Compile Include="Models\UploadPhotoViewModel.cs" />
     <Compile Include="Models\UserManagementViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -223,6 +221,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -253,6 +253,7 @@
     <Content Include="Views\Shared\_UserMenu.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
     <Content Include="Views\Album\Create.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

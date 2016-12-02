@@ -4,16 +4,17 @@ using PhotoExploration.Domain.Models;
 
 namespace PhotoExploration.Models
 {
-    public class AlbumDetailsViewModel
+    public class AlbumViewModel
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Creator { get; set; }
 
-        public ICollection<Photo> Photos { get; set; }
+        public ICollection<DetailsPhotoViewModel> Photos { get; set; }
 
-        public AlbumDetailsViewModel()
+        public AlbumViewModel()
         {
-            Photos = new HashSet<Photo>();
+            Photos = new HashSet<DetailsPhotoViewModel>();
         }
     }
 }
