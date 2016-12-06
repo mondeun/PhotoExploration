@@ -55,5 +55,16 @@ namespace PhotoExploration.Helpers
 
             return photo;
         }
+
+        public static GalleryPhotoViewModel MapPhoto(this GalleryPhotoViewModel galleryPhoto, Photo photo)
+        {
+            galleryPhoto.Id = photo.Id;
+            galleryPhoto.Name = photo.Name;
+            galleryPhoto.FileName = photo.FileName;
+            galleryPhoto.Description = photo.Description;
+            galleryPhoto.UploadedBy = photo.User.Name;
+
+            return galleryPhoto;
+        }
     }
 }

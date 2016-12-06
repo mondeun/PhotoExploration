@@ -41,7 +41,24 @@ namespace PhotoExploration.Domain.Repositories
         {
             using (var db = new PhotoExplorationContext())
             {
-                var photo = db.Photos.Include("User").Include( i => i.Comments).Include("Album").FirstOrDefault(x => x.Id == id);
+                var photo = db.Photos.Include("User").Include("Comments").Include("Album").FirstOrDefault(x => x.Id == id);
+                photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
+
+                return photo;
+            }
+        }
+
+        public Photo GetLastUploadedPhoto()
+        {
+            using (var db = new PhotoExplorationContext())
+            {
+                var photo =
+                    db.Photos.Include("User")
+                        .Include("Comments")
+                        .Include("Album")
+                        .OrderByDescending(x => x.DateAdded)
+                        .FirstOrDefault();
+
                 photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
 
                 return photo;

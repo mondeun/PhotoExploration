@@ -16,7 +16,7 @@ namespace PhotoExploration.Helpers
             {
                 Id = x.Id,
                 Name = x.Name,
-                Creator = AlbumRepository.GetUserName(x.UserId)
+                Creator = UserRepository.GetUserName(x.UserId)
             }));
 
             return viewAlbums;
@@ -28,7 +28,7 @@ namespace PhotoExploration.Helpers
             {
                 Id = Guid.NewGuid(),
                 Name = viewModel.Name,
-                UserId = AlbumRepository.GetUserId(viewModel.Creator)
+                UserId = UserRepository.GetUserId(viewModel.Creator)
             };
 
             return album;

@@ -4,14 +4,22 @@
     ViewBag.Title = "Register";
 }
 
+@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "user",
+        InsertionMode = InsertionMode.Replace
+    };
+}
+
 <h2>Register</h2>
 
-@using (Html.BeginForm()) 
+@using (Ajax.BeginForm("Register", "Account", FormMethod.Post, options))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>RegistrationModel</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -53,8 +61,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Home", "Index", "Home") | 
-    @Html.ActionLink("Login", "Login")
-</div>

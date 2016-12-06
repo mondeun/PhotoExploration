@@ -4,9 +4,18 @@
     ViewBag.Title = "Login";
 }
 
+@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "user",
+        InsertionMode = InsertionMode.Replace
+    };
+}
+
 <h2>Login</h2>
 
-@using (Html.BeginForm()) 
+@using (Ajax.BeginForm("Login", "Account", FormMethod.Post, options)) 
 {
     @Html.AntiForgeryToken()
     
@@ -36,8 +45,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Home", "Index", "Home") |
-    @Html.ActionLink("Register", "Register")
-</div>

@@ -10,7 +10,19 @@ namespace PhotoExploration.Domain.Repositories
     {
         public void Add(Comment item)
         {
-            throw new NotImplementedException();
+            using (var db = new PhotoExplorationContext())
+            {
+                db.Comments.Add(new Comment
+                {
+                    Id = item.Id,
+                    Text = item.Text,
+                    Date = item.Date,
+                    PhotoId = item.PhotoId,
+                    UserId = item.UserId
+                });
+
+                db.SaveChanges();
+            }
         }
 
         public void Edit(Comment item)

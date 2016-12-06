@@ -4,21 +4,32 @@
     ViewBag.Title = "Show";
 }
 
+@{
+    var options = new AjaxOptions
+    {
+        UpdateTargetId = "addComment",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET",
+    };
+}
+
 <h2>Show</h2>
 
 <div class="row">
     <h3>@Model.Name</h3>
     <img class="img-thumbnail" style="max-height: 75%" src="~/Photos/@Model.FileName" alt="@Model.Name"/>
     <p>@Model.Description</p>
-    <p>@Model.UploadedBy</p>
+    <p>Uploaded by: @Model.UploadedBy</p>
     
     <h3>Comments</h3>
-    @foreach (var comment in Model.Comments.OrderBy(x => x.Date))
+    @if (User.Identity.IsAuthenticated)
     {
-        <h4>@comment.Commenter</h4>
-        <p>@comment.Date.ToLocalTime()</p>
-        <p>@comment.Comment</p>
+        @Ajax.ActionLink("Add Comment", "AddComment", options)
+        <div id="addComment"></div>
     }
+    <div id="photoComments">
+        @Html.Partial("Comments", Model.Comments)
+    </div>
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index")

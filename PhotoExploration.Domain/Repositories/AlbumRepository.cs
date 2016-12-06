@@ -55,19 +55,11 @@ namespace PhotoExploration.Domain.Repositories
             }
         }
 
-        public static Guid GetUserId(string name)
+        public static List<Album> GetAlbumsByUserId(Guid id)
         {
             using (var db = new PhotoExplorationContext())
             {
-                return db.Users.Single(x => x.Name == name).Id;
-            }
-        }
-
-        public static string GetUserName(Guid id)
-        {
-            using (var db = new PhotoExplorationContext())
-            {
-                return db.Users.Single(x => x.Id == id).Name;
+                return db.Albums.Where(x => x.UserId == id).ToList();
             }
         }
     }

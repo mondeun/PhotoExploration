@@ -39,7 +39,7 @@ namespace PhotoExploration.Controllers
         // GET: Album/Create
         public ActionResult Create()
         {
-            return View();
+            return PartialView();
         }
 
         // POST: Album/Create

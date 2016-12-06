@@ -3,81 +3,79 @@ using System.Web;
 using System.Web.Mvc;
 using PhotoExploration.Domain;
 using PhotoExploration.Domain.Models;
+using PhotoExploration.Domain.Repositories;
+using PhotoExploration.Helpers;
 using PhotoExploration.Models;
 
 namespace PhotoExploration.Controllers
 {
     public class AccountController : Controller
     {
+        private UserRepository userRepository;
+
+        public AccountController()
+        {
+            userRepository = new UserRepository();
+        }
+
         // GET: User
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel user)
         {
             if (!ModelState.IsValid)
-                return View(user);
+                return PartialView(user);
 
-            using (var db = new PhotoExplorationContext())
+            var dbUser = new LoginModel();
+            dbUser.MapUser(userRepository.GetUserByCredentials(user.Email, user.Password));
+
+            if (dbUser.Email != null && dbUser.Password != null)
             {
-                foreach (var dbUser in db.Users)
+                var identity = new ClaimsIdentity(new[]
                 {
-                    if (user.Email == dbUser.Email && user.Password == dbUser.Password)
-                    {
-                        var identity = new ClaimsIdentity(new[]
-                        {
-                            new Claim(ClaimTypes.Name, dbUser.Name),
-                            new Claim(ClaimTypes.Email, dbUser.Email),
-                            new Claim(ClaimTypes.Role, dbUser.Admin ? "Admin" : "User"), 
-                            new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
-                        }, "AppCookie");
+                    new Claim(ClaimTypes.Name, dbUser.Name),
+                    new Claim(ClaimTypes.Email, dbUser.Email),
+                    new Claim(ClaimTypes.Role, dbUser.Admin ? "Admin" : "User"),
+                    new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
+                }, "AppCookie");
 
-                        var ctx = Request.GetOwinContext();
-                        var auth = ctx.Authentication;
-                        auth.SignIn(identity);
+                var ctx = Request.GetOwinContext();
+                var auth = ctx.Authentication;
+                auth.SignIn(identity);
 
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
+                return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError("", "Wrong email or password");
-            return View(user);
+
+            return PartialView(user);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
         [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public ActionResult Register(RegistrationModel user)
         {
             if (ModelState.IsValid)
-            {
-                using (var db = new PhotoExplorationContext())
-                {
-                    db.Users.Add(new User
-                    {
-                        Email = user.Email,
-                        Name = user.Name,
-                        Password = user.Password,
-                        Admin = false
-                    });
-
-                    db.SaveChanges();
-                }
-            }
+                userRepository.Add(user.MapUser());
             else
+            {
                 ModelState.AddModelError("", "Missing information");
+                return PartialView(user);
+            }
 
             return RedirectToAction("Index", "Home");
         }

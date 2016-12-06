@@ -4,17 +4,27 @@
     ViewBag.Title = "Index";
 }
 
+@{
+    var options = new AjaxOptions
+    {
+        UpdateTargetId = "newAlbum",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET"
+    };
+}
+
 <h2>Index</h2>
 
 <div class="container">
     <div class="col-sm-12">
-        <h3>@Html.ActionLink("New Album", "Create", "Album", new { area = "" }, new { @class = "caption" })</h3>
+        <h3 class="caption">@Ajax.ActionLink("New Album", "Create", options)</h3>
+        <div id="newAlbum"></div>
     </div>
-    <div class="row">
+    <div class="row" id="albumList">
         @foreach (var album in Model)
         {
             <div class="col-sm-3">
-                <h3>@Html.ActionLink(album.Name, "Details", "Album", new { id = album.Id }, new { @class = "thumbnail" })</h3>
+                <h3>@Html.ActionLink(album.Name, "Details", "Album", new { id = album.Id }, new { @class = "thumbnail", @id = "ctr" })</h3>
             </div>
         }
     </div>

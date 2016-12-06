@@ -7,16 +7,19 @@ using System.Web.Mvc;
 using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Helpers;
 using PhotoExploration.Models;
+using WebGrease.Css.Extensions;
 
 namespace PhotoExploration.Controllers
 {
     public class GalleryController : Controller
     {
         private PhotoRepository photoRepository;
+        private CommentRepository commentRepository;
 
         public GalleryController()
         {
             photoRepository = new PhotoRepository();
+            commentRepository = new CommentRepository();
         }
 
         // GET: Gallery
@@ -39,13 +42,18 @@ namespace PhotoExploration.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public ActionResult UploadPhoto()
         {
             var photo = new GalleryPhotoViewModel();
+            var albums = AlbumRepository.GetAlbumsByUserId(UserRepository.GetUserId(User.Identity.Name));
+            albums.ForEach(x => photo.Albums.Add(new SelectListItem {Text = x.Name, Value = x.Id.ToString()}));
+
             return PartialView(photo);
         }
         
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult UploadPhoto(GalleryPhotoViewModel model, HttpPostedFileBase photo)
         {
             if (!ModelState.IsValid)
@@ -55,6 +63,28 @@ namespace PhotoExploration.Controllers
 
             photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
             return View("Index");
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Comments(ICollection<CommentViewModel> comments)
+        {
+            return PartialView(comments);
+        }
+
+        [HttpGet]
+        public ActionResult AddComment()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(CommentViewModel model)
+        {
+            commentRepository.Add(model.MapComment());
+
+            return PartialView("Comments");
         }
     }
 }

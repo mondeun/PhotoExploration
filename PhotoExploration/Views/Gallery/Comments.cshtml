@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PhotoExploration.Models.CommentViewModel>
+
+@foreach (var comment in Model.OrderBy(x => x.Date))
+{
+    <h4>@comment.Commenter</h4>
+            <h5>@comment.Date.ToLocalTime()</h5>
+            <p>@comment.Comment</p>
+}

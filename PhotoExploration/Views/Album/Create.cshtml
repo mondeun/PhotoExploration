@@ -4,9 +4,17 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "albumList",
+        InsertionMode = InsertionMode.Replace
+    };
+}
+
+@using (Ajax.BeginForm("Create", "Album", options)) 
 {
     @Html.AntiForgeryToken()
     
@@ -31,7 +39,3 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to Albums", "Index")
-</div>

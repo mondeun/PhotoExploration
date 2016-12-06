@@ -17,7 +17,7 @@
 
 <div class="container">
     <div class="col-sm-12">
-        @Ajax.ActionLink("Upload Photo", "UploadPhoto", options)
+        <h3 class="caption">@Ajax.ActionLink("Upload Photo", "UploadPhoto", options)</h3>
         <div id="upload"></div>
     </div>
     <div class="row" id="galleryList">
@@ -25,8 +25,8 @@
         {
             <div class="col-sm-3">
                 <a href="@string.Format($"/Gallery/Details/{photo.Id}")" class="thumbnail">
+                    <h3 class="caption" id="ctr">@photo.Name</h3>
                     <img src="~/Photos/@photo.FileName" alt="@photo.Name">
-                    <h3 class="caption">@photo.Name</h3>
                 </a>
             </div>
         }

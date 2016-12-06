@@ -21,10 +21,10 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var photos = new List<GalleryPhotoViewModel>();
-            photos.MapPhotos(PhotoRepository.GetItems().ToList());
+            var photo = new GalleryPhotoViewModel();
+            photo.MapPhoto(PhotoRepository.GetLastUploadedPhoto());
 
-            return View(photos);
+            return View(photo);
         }
 
         [AllowAnonymous]
