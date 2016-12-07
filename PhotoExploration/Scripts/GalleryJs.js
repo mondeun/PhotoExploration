@@ -14,3 +14,8 @@
             });
         });
     });
+
+
+function Success() {
+    $("#addComment").html("");
+}

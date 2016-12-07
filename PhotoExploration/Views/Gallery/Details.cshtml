@@ -24,7 +24,7 @@
     <h3>Comments</h3>
     @if (User.Identity.IsAuthenticated)
     {
-        @Ajax.ActionLink("Add Comment", "AddComment", options)
+        @Ajax.ActionLink("Add Comment", "AddComment", Model, options)
         <div id="addComment"></div>
     }
     <div id="photoComments">

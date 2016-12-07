@@ -73,18 +73,25 @@ namespace PhotoExploration.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddComment()
+        public ActionResult AddComment(GalleryPhotoViewModel model)
         {
-            return PartialView();
+            var comment = new CommentViewModel {PhotoId = model.Id};
+
+            return PartialView(comment);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddComment(CommentViewModel model)
         {
+            model.Commenter = User.Identity.Name;
             commentRepository.Add(model.MapComment());
 
-            return PartialView("Comments");
+            var photo = new DetailsPhotoViewModel();
+            var picture = photoRepository.FindById(model.PhotoId);
+            photo.MapPhoto(picture);
+
+            return PartialView("Comments", photo.Comments);
         }
     }
 }

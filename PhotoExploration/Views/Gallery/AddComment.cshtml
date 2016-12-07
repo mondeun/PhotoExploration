@@ -1,12 +1,28 @@
 ﻿@model PhotoExploration.Models.CommentViewModel
 
-@using (Html.BeginForm()) 
+@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "photoComments",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "Success"
+    };
+}
+
+@using (Ajax.BeginForm("AddComment", "Gallery", options)) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PhotoId, new { @value = Model.PhotoId})
+        </div>
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Commenter, new { @value = User.Identity.Name })
+        </div>
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
