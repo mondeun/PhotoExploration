@@ -58,8 +58,8 @@ namespace PhotoExploration.Domain.Repositories
                         .Include("Album")
                         .OrderByDescending(x => x.DateAdded)
                         .FirstOrDefault();
-
-                photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
+                if(photo != null)
+                    photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
 
                 return photo;
             }

@@ -13,10 +13,13 @@
     <div class="row">
         <h2>Latest Uploaded</h2>
         <div class="col-sm-12">
-            <a href="@string.Format($"/Gallery/Details/{Model.Id}")" class="thumbnail">
-                <h3 class="caption" id="ctr">@Model.Name</h3>
-                <img src="~/Photos/@Model.FileName" alt="@Model.Name">
-            </a>
+            @if (Model != null)
+            {
+                <a href="@string.Format($"/Gallery/Details/{Model.Id}")" class="thumbnail">
+                    <h3 class="caption" id="ctr">@Model.Name</h3>
+                    <img src="~/Photos/@Model.FileName" alt="@Model.Name">
+                </a>
+            }
         </div>
     </div>
 </div>
