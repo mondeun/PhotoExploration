@@ -10,7 +10,9 @@
     {
         HttpMethod = "POST",
         UpdateTargetId = "albumList",
-        InsertionMode = InsertionMode.Replace
+        InsertionMode = InsertionMode.Replace,
+        OnBegin = "begin",
+        OnSuccess = "success"
     };
 }
 
@@ -39,3 +41,4 @@
         </div>
     </div>
 }
+<script src="~/Scripts/album.js" type="text/javascript"></script>

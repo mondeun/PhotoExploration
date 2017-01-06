@@ -6,7 +6,10 @@
         HttpMethod = "POST",
         UpdateTargetId = "photoComments",
         InsertionMode = InsertionMode.Replace,
-        OnSuccess = "Success"
+        LoadingElementDuration = 2000,
+        LoadingElementId = "loader",
+        OnBegin = "begin",
+        OnSuccess = "success"
     };
 }
 
@@ -38,7 +41,4 @@
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+<script src="~/Scripts/addComment.js" type="text/javascript"></script>

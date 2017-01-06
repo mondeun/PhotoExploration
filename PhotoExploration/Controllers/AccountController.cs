@@ -23,6 +23,9 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return PartialView();
         }
 
@@ -61,6 +64,9 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Home");
+
             return PartialView();
         }
 

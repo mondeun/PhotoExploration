@@ -1,5 +1,5 @@
-﻿var form = $("uploadForm");
-var loader = $(".loader").hide();
+﻿var form = $("#uploadForm");
+var loader = $(".loader");
 
 form.on("submit", function(e) {
     e.preventDefault();
@@ -10,15 +10,15 @@ form.on("submit", function(e) {
         data: new FormData(form[0]),
         processData: false,
         contentType: false,
-        sucess: function(data) {
+        success: function(data) {
             $("#addComment").html("");
-            form.reset();
         },
         beforeSend: function() {
             loader.show();
         },
         complete: function() {
             loader.hide();
+            form[0].reset();
         }
     });
 });

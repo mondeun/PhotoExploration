@@ -26,6 +26,15 @@ namespace PhotoExploration.Controllers
             return View(albums);
         }
 
+        [AllowAnonymous]
+        public ActionResult List(List<AlbumViewModel> model)
+        {
+            var albums = new List<AlbumViewModel>();
+            albums.MapAlbums(AlbumRepository.GetItems().ToList());
+
+            return PartialView(albums);
+        }
+
         // GET: Album/Details/5
         [AllowAnonymous]
         public ActionResult Details(AlbumViewModel model)
@@ -51,9 +60,12 @@ namespace PhotoExploration.Controllers
             {
                 AlbumRepository.Add(model.MapAlbum());
 
-                return RedirectToAction("Index");
+                var albums = new List<AlbumViewModel>();
+                albums.MapAlbums(AlbumRepository.GetItems().ToList());
+
+                return PartialView("List", albums);
             }
-            return View();
+            return PartialView(model);
         }
     }
 }

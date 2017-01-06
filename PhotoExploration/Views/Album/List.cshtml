@@ -1,0 +1,8 @@
+﻿@model IEnumerable<PhotoExploration.Models.AlbumViewModel>
+
+@foreach (var album in Model)
+{
+    <div class="col-sm-3">
+        <h3>@Html.ActionLink(album.Name, "Details", "Album", new { id = album.Id }, new { @class = "thumbnail", @id = "ctr" })</h3>
+    </div>
+}

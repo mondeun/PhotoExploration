@@ -19,13 +19,9 @@
     <div class="col-sm-12">
         <h3 class="caption">@Ajax.ActionLink("New Album", "Create", options)</h3>
         <div id="newAlbum"></div>
+        <div class="loader" style="display: none"></div>
     </div>
     <div class="row" id="albumList">
-        @foreach (var album in Model)
-        {
-            <div class="col-sm-3">
-                <h3>@Html.ActionLink(album.Name, "Details", "Album", new { id = album.Id }, new { @class = "thumbnail", @id = "ctr" })</h3>
-            </div>
-        }
+        @Html.Partial("List")
     </div>
 </div>

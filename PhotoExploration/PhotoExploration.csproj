@@ -207,6 +207,7 @@
     <Content Include="Photos\img4.jpg" />
     <Content Include="Photos\img5.jpg" />
     <Content Include="Photos\img6.jpg" />
+    <Content Include="Scripts\addComment.js" />
     <Content Include="Scripts\album.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -257,6 +258,7 @@
     <Content Include="Views\Album\Details.cshtml" />
     <Content Include="Views\Gallery\Comments.cshtml" />
     <Content Include="Views\Gallery\AddComment.cshtml" />
+    <Content Include="Views\Album\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

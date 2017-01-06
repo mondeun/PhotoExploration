@@ -26,6 +26,7 @@
     {
         @Ajax.ActionLink("Add Comment", "AddComment", Model, options)
         <div id="addComment"></div>
+        <div class="loader" style="display: none"></div>
     }
     <div id="photoComments">
         @Html.Partial("Comments", Model.Comments)
