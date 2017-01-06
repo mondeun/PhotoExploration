@@ -10,6 +10,7 @@ form.on("submit", function(e) {
         data: new FormData(form[0]),
         processData: false,
         contentType: false,
+        timeout: 3000,
         success: function(data) {
             $("#addComment").html("");
         },

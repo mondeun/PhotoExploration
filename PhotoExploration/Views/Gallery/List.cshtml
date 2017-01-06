@@ -1,0 +1,11 @@
+﻿@model IEnumerable<PhotoExploration.Models.GalleryPhotoViewModel>
+
+@foreach (var photo in Model)
+{
+    <div class="col-sm-3">
+        <a href="@string.Format($"/Gallery/Details/{photo.Id}")" class="thumbnail">
+            <h3 class="caption" id="ctr">@photo.Name</h3>
+            <img src="~/Photos/@photo.FileName" alt="@photo.Name">
+        </a>
+    </div>
+}
