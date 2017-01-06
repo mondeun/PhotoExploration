@@ -59,10 +59,10 @@ namespace PhotoExploration.Controllers
             if (!ModelState.IsValid)
                 return PartialView(model);
 
-            photoRepository.Add(model.MapPhoto(photo.FileName));
+            photoRepository.Add(model.MapPhoto(photo.FileName, UserRepository.GetUserId(User.Identity.Name)));
 
             photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         [AllowAnonymous]

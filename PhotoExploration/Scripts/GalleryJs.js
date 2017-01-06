@@ -1,21 +1,24 @@
-﻿$(document)
-    .ready(function() {
-        var form = $("form");
-        form.submit(function(e) {
-            $.ajax({
-                method: "POST",
-                url: "Gallery/UploadPhoto",
-                data: new FormData(document.getElementsByTagName("form")[0]),
-                success: function(data) {
-                    $("div#galleryList").html(data);
-                },
-                processData: false,
-                contentType: false
-            });
-        });
+﻿var form = $("uploadForm");
+var loader = $(".loader").hide();
+
+form.on("submit", function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: "Gallery/UploadPhoto",
+        method: "POST",
+        data: new FormData(form[0]),
+        processData: false,
+        contentType: false,
+        sucess: function(data) {
+            $("#addComment").html("");
+            form.reset();
+        },
+        beforeSend: function() {
+            loader.show();
+        },
+        complete: function() {
+            loader.hide();
+        }
     });
-
-
-function Success() {
-    $("#addComment").html("");
-}
+});

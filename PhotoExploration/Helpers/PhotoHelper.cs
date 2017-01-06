@@ -41,7 +41,7 @@ namespace PhotoExploration.Helpers
             return galleryPhotos;
         }
 
-        public static Photo MapPhoto(this GalleryPhotoViewModel viewModel, string fileName)
+        public static Photo MapPhoto(this GalleryPhotoViewModel viewModel, string fileName, Guid uploader)
         {
             var photo = new Photo()
             {
@@ -50,7 +50,8 @@ namespace PhotoExploration.Helpers
                 Description = viewModel.Description,
                 DateAdded = DateTime.Now,
                 FileName = fileName,
-                AlbumId = viewModel.AlbumId
+                AlbumId = viewModel.AlbumId,
+                UserId = uploader
             };
 
             return photo;

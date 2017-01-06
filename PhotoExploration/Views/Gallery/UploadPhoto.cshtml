@@ -4,16 +4,7 @@
     ViewBag.Title = "UploadPhoto";
 }
 
-@{
-    var options = new AjaxOptions
-    {
-        HttpMethod = "POST",
-        UpdateTargetId = "galleryList",
-        InsertionMode = InsertionMode.Replace
-    };
-}
-
-@using (Html.BeginForm("UploadPhoto", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadPhoto", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -58,3 +49,5 @@
         </div>
     </div>
 }
+
+<script src="~/Scripts/GalleryJs.js"></script>
