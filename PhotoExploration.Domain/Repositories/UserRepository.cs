@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PhotoExploration.Domain.Interfaces;
 using PhotoExploration.Domain.Models;
 
@@ -48,7 +45,7 @@ namespace PhotoExploration.Domain.Repositories
             throw new NotImplementedException();
         }
 
-        public User GetUserByCredentials(string email, string password)
+        public static User GetUserByCredentials(string email, string password)
         {
             using (var db = new PhotoExplorationContext())
             {

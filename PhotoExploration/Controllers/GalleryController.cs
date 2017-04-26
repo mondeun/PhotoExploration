@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PhotoExploration.Domain.Interfaces;
+using PhotoExploration.Domain.Models;
 using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Helpers;
 using PhotoExploration.Models;
-using WebGrease.Css.Extensions;
 
 namespace PhotoExploration.Controllers
 {
     public class GalleryController : Controller
     {
-        private PhotoRepository photoRepository;
-        private CommentRepository commentRepository;
+        private readonly IRepository<Photo> _photoRepository;
+        private readonly IRepository<Comment> _commentRepository;
 
         public GalleryController()
         {
-            photoRepository = new PhotoRepository();
-            commentRepository = new CommentRepository();
+            _photoRepository = new PhotoRepository();
+            _commentRepository = new CommentRepository();
         }
 
         // GET: Gallery
@@ -27,7 +27,7 @@ namespace PhotoExploration.Controllers
         public ActionResult Index()
         {
             var photos = new List<GalleryPhotoViewModel>();
-            photos.MapPhotos(photoRepository.GetItems().ToList());
+            photos.MapPhotos(_photoRepository.GetItems().ToList());
 
             return View(photos);
         }
@@ -35,7 +35,7 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Details(DetailsPhotoViewModel photo)
         {
-            var picture = photoRepository.FindById(photo.Id);
+            var picture = _photoRepository.FindById(photo.Id);
             photo.MapPhoto(picture);
 
             return View(photo);
@@ -59,7 +59,7 @@ namespace PhotoExploration.Controllers
             if (!ModelState.IsValid)
                 return PartialView(model);
 
-            photoRepository.Add(model.MapPhoto(photo.FileName, UserRepository.GetUserId(User.Identity.Name)));
+            _photoRepository.Add(model.MapPhoto(photo.FileName, UserRepository.GetUserId(User.Identity.Name)));
 
             photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
             return RedirectToAction("Index");
@@ -85,10 +85,10 @@ namespace PhotoExploration.Controllers
         public ActionResult AddComment(CommentViewModel model)
         {
             model.Commenter = User.Identity.Name;
-            commentRepository.Add(model.MapComment());
+            _commentRepository.Add(model.MapComment());
 
             var photo = new DetailsPhotoViewModel();
-            var picture = photoRepository.FindById(model.PhotoId);
+            var picture = _photoRepository.FindById(model.PhotoId);
             photo.MapPhoto(picture);
 
             return PartialView("Comments", photo.Comments);

@@ -10,6 +10,5 @@ namespace PhotoExploration.Domain.Interfaces
         void Remove(Guid id);
         IEnumerable<T> GetItems();
         T FindById(Guid id);
-
     }
 }

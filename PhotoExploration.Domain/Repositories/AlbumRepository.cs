@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using PhotoExploration.Domain.Interfaces;
 using PhotoExploration.Domain.Models;

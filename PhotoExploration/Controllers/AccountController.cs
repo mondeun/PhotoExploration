@@ -1,8 +1,6 @@
 ﻿using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using PhotoExploration.Domain;
-using PhotoExploration.Domain.Models;
 using PhotoExploration.Domain.Repositories;
 using PhotoExploration.Helpers;
 using PhotoExploration.Models;
@@ -11,11 +9,11 @@ namespace PhotoExploration.Controllers
 {
     public class AccountController : Controller
     {
-        private UserRepository userRepository;
+        private readonly UserRepository _userRepository;
 
         public AccountController()
         {
-            userRepository = new UserRepository();
+            _userRepository = new UserRepository();
         }
 
         // GET: User
@@ -38,7 +36,7 @@ namespace PhotoExploration.Controllers
                 return PartialView(user);
 
             var dbUser = new LoginModel();
-            dbUser.MapUser(userRepository.GetUserByCredentials(user.Email, user.Password));
+            dbUser.MapUser(UserRepository.GetUserByCredentials(user.Email, user.Password));
 
             if (dbUser.Email != null && dbUser.Password != null)
             {
@@ -76,10 +74,10 @@ namespace PhotoExploration.Controllers
         public ActionResult Register(RegistrationModel user)
         {
             if (ModelState.IsValid)
-                userRepository.Add(user.MapUser());
+                _userRepository.Add(user.MapUser());
             else
             {
-                ModelState.AddModelError("", "Missing information");
+                ModelState.AddModelError("", @"Missing information");
                 return PartialView(user);
             }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using PhotoExploration.Domain.Interfaces;
 using PhotoExploration.Domain.Models;
@@ -42,13 +41,14 @@ namespace PhotoExploration.Domain.Repositories
             using (var db = new PhotoExplorationContext())
             {
                 var photo = db.Photos.Include("User").Include("Comments").Include("Album").FirstOrDefault(x => x.Id == id);
-                photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
+                if (photo != null)
+                    photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id)?.ToList();
 
                 return photo;
             }
         }
 
-        public Photo GetLastUploadedPhoto()
+        public static Photo GetLastUploadedPhoto()
         {
             using (var db = new PhotoExplorationContext())
             {
@@ -62,14 +62,6 @@ namespace PhotoExploration.Domain.Repositories
                     photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
 
                 return photo;
-            }
-        }
-
-        public static string GetUserName(Guid id)
-        {
-            using (var db = new PhotoExplorationContext())
-            {
-                return db.Users.Single(x => x.Id == id).Name;
             }
         }
     }

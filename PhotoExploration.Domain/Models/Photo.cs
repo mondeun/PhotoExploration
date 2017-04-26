@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PhotoExploration.Domain.Models
 {
-    public class Photo
+    public sealed class Photo
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
@@ -13,10 +13,10 @@ namespace PhotoExploration.Domain.Models
         public Guid UserId { get; set; }
         public Guid? AlbumId { get; set; }
 
-        public virtual Album Album { get; set; }
-        public virtual User User { get; set; }
+        public Album Album { get; set; }
+        public User User { get; set; }
 
-        public virtual ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; }
 
         public Photo()
         {

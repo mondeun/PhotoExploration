@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using PhotoExploration.Domain.Interfaces;
+using PhotoExploration.Domain.Models;
 using PhotoExploration.Helpers;
 using PhotoExploration.Models;
 using PhotoExploration.Domain.Repositories;
@@ -10,11 +11,11 @@ namespace PhotoExploration.Controllers
 {
     public class AlbumController : Controller
     {
-        private AlbumRepository AlbumRepository { get; set; }
+        private readonly IRepository<Album> _albumRepository;
 
         public AlbumController()
         {
-            AlbumRepository = new AlbumRepository();
+            _albumRepository = new AlbumRepository();
         }
 
         // GET: Album
@@ -22,7 +23,7 @@ namespace PhotoExploration.Controllers
         public ActionResult Index()
         {
             var albums = new List<AlbumViewModel>();
-            albums.MapAlbums(AlbumRepository.GetItems().ToList());
+            albums.MapAlbums(_albumRepository.GetItems().ToList());
             return View(albums);
         }
 
@@ -30,7 +31,7 @@ namespace PhotoExploration.Controllers
         public ActionResult List(List<AlbumViewModel> model)
         {
             var albums = new List<AlbumViewModel>();
-            albums.MapAlbums(AlbumRepository.GetItems().ToList());
+            albums.MapAlbums(_albumRepository.GetItems().ToList());
 
             return PartialView(albums);
         }
@@ -39,7 +40,7 @@ namespace PhotoExploration.Controllers
         [AllowAnonymous]
         public ActionResult Details(AlbumViewModel model)
         {
-            var album = AlbumRepository.FindById(model.Id);
+            var album = _albumRepository.FindById(model.Id);
             model.MapPhoto(album);
 
             return View(model);
@@ -58,10 +59,10 @@ namespace PhotoExploration.Controllers
         {
             if (ModelState.IsValid)
             {
-                AlbumRepository.Add(model.MapAlbum());
+                _albumRepository.Add(model.MapAlbum());
 
                 var albums = new List<AlbumViewModel>();
-                albums.MapAlbums(AlbumRepository.GetItems().ToList());
+                albums.MapAlbums(_albumRepository.GetItems().ToList());
 
                 return PartialView("List", albums);
             }

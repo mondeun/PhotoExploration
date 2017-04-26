@@ -2,7 +2,7 @@
 
 namespace PhotoExploration.Domain.Models
 {
-    public class Comment
+    public sealed class Comment
     {
         public Guid Id { get; set; }
         public string Text { get; set; }

@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using PhotoExploration.Areas.Administration.Models;
 using PhotoExploration.Domain;
-using WebGrease.Css.Extensions;
 
 namespace PhotoExploration.Areas.Administration.Controllers
 {
@@ -62,62 +58,30 @@ namespace PhotoExploration.Areas.Administration.Controllers
             }
         }
 
-        public ActionResult ListUsers()
-        {
-            var users = new List<UserViewModel>();
-
-            using (var db = new PhotoExplorationContext())
-            {
-                db.Users.ToList().ForEach(x => users.Add(new UserViewModel
-                {
-                    Id = x.Id,
-                    Name = x.Name,
-                    Email = x.Email,
-                }));
-            }
-
-            return PartialView(users);
-        }
-
-        [Authorize]
-        public ActionResult UploadPhoto(UploadPhotoViewModel model)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Authorize]
-        public ActionResult UploadPhoto(UploadPhotoViewModel model, HttpPostedFileBase photo)
-        {
-            if (!ModelState.IsValid)
-                return View(model);
-
-            //using (var db = new PhotoExplorationContext())
-            //{
-            //    db.Photos.Add(new Photo
-            //    {
-            //        Title = model.Title,
-            //        Description = model.Description,
-            //        DateAdded = DateTime.Now,
-            //        Path = photo.FileName
-            //    });
-
-            //    db.SaveChanges();
-            //}
-
-            photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
-            return RedirectToAction("Index");
-        }
-
         [Authorize]
         public ActionResult DeleteComment(Guid? id)
         {
             if (id == null)
+            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
             using (var db = new PhotoExplorationContext())
             {
                 var comment = db.Comments.Include(i => i.Photo).FirstOrDefault(x => x.Id == id);
-                return comment == null ? (ActionResult) HttpNotFound() : View(comment);
+                if (comment == null)
+                {
+                    return HttpNotFound();
+                }
+                var viewComment = new CommentViewModel
+                {
+                    Id = comment.Id,
+                    Commenter = comment.User.Name,
+                    Date = comment.Date,
+                    PhotoName = comment.Photo.Name,
+                    Comment = comment.Text
+                };
+                return View(viewComment);
             }
         }
 
@@ -129,6 +93,10 @@ namespace PhotoExploration.Areas.Administration.Controllers
             using (var db = new PhotoExplorationContext())
             {
                 var comment = db.Comments.Include(i => i.Photo).FirstOrDefault(x => x.Id == id);
+                if (comment == null)
+                {
+                    return new HttpNotFoundResult();
+                }
                 db.Comments.Remove(comment);
 
                 db.SaveChanges();

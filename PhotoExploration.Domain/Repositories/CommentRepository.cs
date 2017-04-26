@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using PhotoExploration.Domain.Interfaces;
 using PhotoExploration.Domain.Models;
 
@@ -43,14 +42,6 @@ namespace PhotoExploration.Domain.Repositories
         public Comment FindById(Guid id)
         {
             throw new NotImplementedException();
-        }
-
-        public static string GetUserName(Guid id)
-        {
-            using (var db = new PhotoExplorationContext())
-            {
-                return db.Users.Single(x => x.Id == id).Name;
-            }
         }
     }
 }
